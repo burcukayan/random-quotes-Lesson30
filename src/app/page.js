@@ -1,8 +1,6 @@
 "use client";
 
-import { Button } from "@/components/Button";
 import { useContext } from "react";
-import { H3 } from "@/components/typography/H3";
 import { QuotesContext } from "@/app/QuotesContext";
 
 export default function Home() {
@@ -12,26 +10,38 @@ export default function Home() {
   const { quote, author, isLiked } = quotes[quoteIndex];
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-slate-200">
-      <section className="bg-slate-50/50 rounded-md p-10 flex flex-col min-w-[600px]">
-        <div className="self-end">
-          <Button variant={"icon"} onClick={handleLikeQuote} disabled={isLiked}>
-            {isLiked ? "❤️" : "🤍"}
-          </Button>
-        </div>
+    <main className="min-h-[calc(100vh-5rem)] flex items-center justify-center p-4 sm:p-8">
+      <section className="card w-full max-w-2xl bg-base-200 shadow-xl">
+        <div className="card-body">
+          <div className="card-actions justify-end">
+            <button
+              className={`btn btn-circle ${isLiked ? "btn-disabled" : "btn-ghost text-2xl"}`}
+              onClick={handleLikeQuote}
+              disabled={isLiked}
+              aria-label={isLiked ? "Beğenildi" : "Sözü beğen"}
+            >
+              {isLiked ? "❤️" : "🤍"}
+            </button>
+          </div>
 
-        <div className="text-center my-4">
-          <H3 element="p">{quote}</H3>
-        </div>
+          <div className="text-center my-6">
+            <h1 className="text-2xl sm:text-3xl font-extrabold italic text-base-content leading-relaxed">
+              "{quote}"
+            </h1>
+          </div>
 
-        <span className="text-md font-semibold text-slate-900 self-end ">
-          - {author}
-        </span>
+          <div className="flex justify-end mb-4">
+            <h2 className="text-lg font-bold text-base-content">- {author}</h2>
+          </div>
 
-        <div className="mt-6 flex flex-col">
-          <Button variant={"primary"} onClick={handleQuoteIndexUpdate}>
-            Next Quote
-          </Button>
+          <div className="mt-4 w-full">
+            <button
+              className="btn btn-primary w-full sm:w-auto px-8 font-bold"
+              onClick={handleQuoteIndexUpdate}
+            >
+              Next Quote
+            </button>
+          </div>
         </div>
       </section>
     </main>
