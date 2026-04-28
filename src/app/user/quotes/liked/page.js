@@ -2,6 +2,7 @@
 
 import { useContext } from "react";
 import { QuotesContext } from "@/app/QuotesContext";
+import Button from "@/components/Button";
 
 export default function LikedQuotesPage() {
   const { quotes, handleUnlikeQuote } = useContext(QuotesContext);
@@ -35,19 +36,19 @@ export default function LikedQuotesPage() {
                 <p className="italic text-lg sm:text-xl text-base-content font-bold">
                   "{item.quote}"
                 </p>
-
                 <span className="text-sm sm:text-base font-bold text-base-content mt-2">
                   - {item.author}
                 </span>
               </div>
               <div className="flex-none">
-                <button
-                  className="btn btn-error btn-sm sm:btn-md text-white font-bold tracking-wide"
+                <Button
+                  variant="error"
+                  className="btn-sm sm:btn-md font-bold tracking-wide"
                   onClick={() => handleUnlikeQuote(item.originalIndex)}
                   aria-label="Unlike quote"
                 >
                   <span className="hidden sm:inline">Unlike</span> ❌
-                </button>
+                </Button>
               </div>
             </section>
           ))

@@ -2,6 +2,7 @@
 
 import { useContext } from "react";
 import { QuotesContext } from "@/app/QuotesContext";
+import Button from "@/components/Button";
 
 export default function Home() {
   const { quotes, quoteIndex, handleQuoteIndexUpdate, handleLikeQuote } =
@@ -14,14 +15,16 @@ export default function Home() {
       <section className="card w-full max-w-2xl bg-base-200 shadow-xl">
         <div className="card-body">
           <div className="card-actions justify-end">
-            <button
-              className={`btn btn-circle ${isLiked ? "btn-disabled" : "btn-ghost text-2xl"}`}
-              onClick={handleLikeQuote}
-              disabled={isLiked}
+            <Button
+              variant="ghost"
+              className={`btn-circle text-2xl ${isLiked ? "hover:bg-transparent cursor-default" : ""}`}
+              onClick={() => {
+                if (!isLiked) handleLikeQuote();
+              }}
               aria-label={isLiked ? "Beğenildi" : "Sözü beğen"}
             >
               {isLiked ? "❤️" : "🤍"}
-            </button>
+            </Button>
           </div>
 
           <div className="text-center my-6">
@@ -35,12 +38,13 @@ export default function Home() {
           </div>
 
           <div className="mt-4 w-full">
-            <button
-              className="btn btn-primary w-full sm:w-auto px-8 font-bold"
+            <Button
+              variant="primary"
+              className="w-full sm:w-auto px-8 font-bold"
               onClick={handleQuoteIndexUpdate}
             >
               Next Quote
-            </button>
+            </Button>
           </div>
         </div>
       </section>
